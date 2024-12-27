@@ -1,18 +1,42 @@
 return {
-  "williamboman/mason.nvim",
-  opts = {
-    ensure_installed = {
-      "stylua",
-      "shellcheck",
-      "shfmt",
-      "flake8",
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+        "prettier",
 
-      -- Markdown
-      "markdownlint-cli2",
-      "markdown-toc",
+        -- Markdown
+        -- "markdownlint-cli2",
+        "markdown-toc",
 
-      -- C
-      "codelldb",
+        -- C
+        "codelldb",
+      },
     },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "stylua",
+          "shellcheck",
+          "shfmt",
+          "flake8",
+          "prettier",
+
+          -- Markdown
+          -- "markdownlint-cli2",
+          "markdown-toc",
+
+          -- C
+          "codelldb",
+        },
+      })
+    end,
   },
 }

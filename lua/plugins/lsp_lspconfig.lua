@@ -1,5 +1,4 @@
 return {
-  -- add pyright to lspconfig
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
@@ -8,7 +7,7 @@ return {
       servers = {
         clangd = {
           keys = {
-            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header" },
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(

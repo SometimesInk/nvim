@@ -60,8 +60,6 @@ end
 local alpha_c = function()
   local alpha = require("alpha")
 
-  local mocha = require("catppuccin.palettes").get_palette("mocha")
-
   local dashboard = require("alpha.themes.dashboard")
 
   local color_map = {
@@ -94,8 +92,14 @@ local alpha_c = function()
   local orange = "#BF854E"
   local maroon = "#502E2B"
   local brown = "#38291B"
+
+  local rosewater = "#F5D0C5"
+  local crust = "#1E1E2E"
+  local mantle = "#1A1B26"
+  local subtext1 = "#6C6A76"
+
   local colors = {
-    ["A"] = { fg = mocha.rosewater },
+    ["A"] = { fg = rosewater },
     ["Y"] = { fg = yellow },
     ["B"] = { fg = darken(yellow, 5) },
     ["X"] = { fg = darken(yellow, 20) },
@@ -104,14 +108,14 @@ local alpha_c = function()
     ["O"] = { fg = darken(yellow, 45) },
     ["K"] = { fg = maroon },
     ["H"] = { fg = darken(maroon, 10) },
-    ["Z"] = { fg = mocha.crust },
+    ["Z"] = { fg = crust },
     ["G"] = { fg = darken(yellow, 25) },
     ["R"] = { fg = orange },
     ["Q"] = { fg = darken(orange, 20) },
     ["E"] = { fg = darken(orange, 35) },
     ["I"] = { fg = brown },
-    ["C"] = { fg = mocha.mantle },
-    ["S"] = { fg = mocha.subtext1 },
+    ["C"] = { fg = mantle },
+    ["S"] = { fg = subtext1 },
   }
 
   local header = {}
@@ -127,7 +131,7 @@ local alpha_c = function()
     table.insert(header, header_line)
   end
 
-  local header_add = [[ Neovim ]]
+  local header_add = [[ "Ceci est une pipe." ]]
   table.insert(header, header_add)
 
   local hl_add = {}
@@ -146,11 +150,19 @@ local alpha_c = function()
   }
 
   dashboard.section.buttons.val = {
-    dashboard.button("e", "  New file", "<Cmd>ene <CR>"),
-    dashboard.button("f", "  Find file"),
-    dashboard.button("c", "  Config", "<Cmd>Neotree reveal ~/.config/nvim<CR>"),
-    dashboard.button("h", "  Hyprland", "<Cmd>Neotree reveal ~/.config/hypr<CR>"),
-    dashboard.button("q", "  Quit", "<Cmd>qa<CR>"),
+    dashboard.button("n", "  nvim", '<CMD>execute "e ~/.config/nvim/init.lua" | Neotree reveal ~/.config/nvim/<CR>'),
+    dashboard.button(
+      "h",
+      "  hypr",
+      '<CMD>execute "e ~/.config/hypr/hyprland.conf" | Neotree reveal ~/.config/hypr/<CR>'
+    ),
+    dashboard.button("t", "  tmux", '<CMD>execute "e ~/.tmux.conf"<CR>'),
+    dashboard.button(
+      "t",
+      "  kitty",
+      '<CMD>execute "e ~/.config/kitty/kitty.conf" | Neotree reveal ~/.config/kitty/<CR>'
+    ),
+    dashboard.button("q", "  quit", "<CMD>q<CR>"),
   }
   for _, a in ipairs(dashboard.section.buttons.val) do
     a.opts.width = 49

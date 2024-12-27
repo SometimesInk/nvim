@@ -22,3 +22,22 @@ vim.api.nvim_set_keymap("c", "<Up>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("c", "<Down>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("c", "<Left>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("c", "<Right>", "", { noremap = true, silent = true })
+
+-- Toggle diagnostics off
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+  if vim.g.diagnostics_active then
+    vim.g.diagnostics_active = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_active = true
+    vim.diagnostic.enable()
+  end
+end
+
+vim.keymap.set(
+  "n",
+  "<leader>xd",
+  Toggle_diagnostics,
+  { noremap = true, silent = true, desc = "Toggle vim diagnostics" }
+)

@@ -6,3 +6,23 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+vim.api.nvim_create_augroup("HFileAutoCmd", { clear = true })
+
+vim.api.nvim_create_autocmd("BufRead", {
+  group = "HFileAutoCmd",
+  pattern = "*.h",
+  callback = function()
+    -- Run the specified command
+    vim.cmd("set filetype=c")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = "HFileAutoCmd",
+  pattern = "*.h",
+  callback = function()
+    -- Run the specified command
+    vim.cmd("set filetype=c")
+  end,
+})
