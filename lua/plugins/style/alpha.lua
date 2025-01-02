@@ -150,7 +150,7 @@ local alpha_c = function()
   }
 
   dashboard.section.buttons.val = {
-    dashboard.button("n", "  nvim", '<CMD>execute "e ~/.config/nvim/init.lua" | Neotree reveal ~/.config/nvim/<CR>'),
+    dashboard.button("n", "  nvim", '<CMD>execute "e ~/.config/nvim/init.lua" | NvimTreeFindFile<CR>'),
     dashboard.button(
       "h",
       "  hypr",
@@ -173,8 +173,8 @@ local alpha_c = function()
 end
 
 return {
-  "goolord/alpha-nvim",
-  config = function()
-    alpha_c()
-  end,
+  -- "goolord/alpha-nvim",
+  -- config = function()
+  --   alpha_c()
+  -- end,
 }

@@ -14,39 +14,74 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Options
+vim.opt.wrap = true
+
+vim.opt.termguicolors = true
+
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
+vim.opt.nu = true
+vim.wo.number = true
+vim.opt.relativenumber = true
+
+vim.opt.cursorline = true
+
+-- Unbind arrow keys
+vim.api.nvim_set_keymap("n", "<Up>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Down>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Left>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Right>", "", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("i", "<Up>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<Down>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<Left>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<Right>", "", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("v", "<Up>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<Down>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<Left>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<Right>", "", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("c", "<Up>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<Down>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<Left>", "", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<Right>", "", { noremap = true, silent = true })
+
+-- Turn .h files into C
+vim.api.nvim_create_augroup("HFileAutoCmd", { clear = true })
+
+vim.api.nvim_create_autocmd("BufRead", {
+  group = "HFileAutoCmd",
+  pattern = "*.h",
+  callback = function()
+    -- Run the specified command
+    vim.cmd("set filetype=c")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = "HFileAutoCmd",
+  pattern = "*.h",
+  callback = function()
+    -- Run the specified command
+    vim.cmd("set filetype=c")
+  end,
+})
+
+-- Setup lazy.nvim plugins
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import/override with your plugins
-    { import = "plugins" },
+    { import = "plugins/code" },
+    { import = "plugins/lsp" },
+    { import = "plugins/notes" },
+    { import = "plugins/style" },
   },
-  defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
-  },
-  checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
-  performance = {
-    rtp = {
-      -- disable some rtp plugins
-      disabled_plugins = {
-        "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
-  },
+  install = { colorscheme = { "catppuccin" } },
 })

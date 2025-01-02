@@ -1,6 +1,7 @@
 return {
   {
     "MunifTanjim/prettier.nvim",
+    enabled = false,
     config = function()
       require("prettier").setup({
         bin = "prettier", -- or `'prettierd'` (v0.23.3+)

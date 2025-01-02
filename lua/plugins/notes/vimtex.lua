@@ -1,5 +1,6 @@
 return {
   "lervag/vimtex",
+  enabled = false,
   lazy = false, -- lazy-loading will disable inverse search
   init = function()
     -- VimTeX configuration goes here, e.g.
