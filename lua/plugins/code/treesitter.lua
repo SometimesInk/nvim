@@ -8,21 +8,14 @@ return {
       ignore_install = {},
       ensure_installed = {
         "c",
-        "cpp",
-        "go",
         "lua",
-        "python",
-        "rust",
-        "tsx",
-        "javascript",
-        "typescript",
         "vimdoc",
         "vim",
         "bash",
         "markdown",
         "markdown_inline",
       },
-      auto_install = false,
+      auto_install = true,
       highlight = {
         enable = true,  -- Ensure highlighting is enabled
         additional_vim_regex_highlighting = false,  -- Disables Vim regex highlighting
