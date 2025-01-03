@@ -1,6 +1,8 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     local lspconfig = require("lspconfig")
 
     -- Function to attach key mappings for LSP actions
@@ -17,6 +19,7 @@ return {
 
     -- Setup LSP servers
     lspconfig.lua_ls.setup({
+      capabilities = capabilities,
       Lua = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -39,10 +42,12 @@ return {
 
     lspconfig.clangd.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
     })
 
     lspconfig.bashls.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
     })
   end,
 }
