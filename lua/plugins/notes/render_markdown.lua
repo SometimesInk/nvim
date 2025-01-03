@@ -4,7 +4,7 @@ return {
   dependencies = { 'nvim-treesitter/nvim-treesitter', },
   opts = {
     -- Maximum file size this plugins will render
-    max_file_size = 10.0,
+    max_file_size = 25.0,
     -- Time interval between updates when writing
     debounce = 250,
     file_types = { 'markdown' },
@@ -20,7 +20,7 @@ return {
     },
     code = {
       position = 'left',
-      below = ' ',
+      below = '█',
     },
     quote = {
       -- Wrapped quote lines render quote prefix
