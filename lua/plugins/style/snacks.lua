@@ -2,7 +2,6 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     animate = {
       duration = 20, -- ms per step
@@ -11,6 +10,15 @@ return {
     },
     bigfile = { enabled = false },
     dashboard = { enabled = false },
+    dim = {
+      -- Cut animation maximum duration in half.
+      animate = {
+        duration = {
+          step = 20,
+          total = 150,
+        }
+      }
+    },
     indent = { enabled = true },
 
     notifier = {

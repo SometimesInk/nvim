@@ -22,5 +22,5 @@ require("lazy").setup({
     { import = "plugins/notes" },
     { import = "plugins/style" },
   },
-  install = { colorscheme = { "catppuccin" } },
+  -- install = { colorscheme = { "tokyonight" } },
 })
