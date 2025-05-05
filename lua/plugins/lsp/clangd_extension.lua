@@ -26,6 +26,6 @@ return {
     },
   },
   keys = {
-    { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header" },
+    { "<leader>h", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header" },
   },
 }

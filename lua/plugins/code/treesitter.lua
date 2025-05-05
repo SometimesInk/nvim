@@ -1,7 +1,7 @@
 return {
-  -- add more treesitter parsers
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     opts = {
       modules = {},
       sync_install = true,
@@ -14,6 +14,15 @@ return {
         "bash",
         "markdown",
         "markdown_inline",
+        "make",
+
+        "css",
+        "latex",
+        "norg",
+        "scss",
+        "svelte",
+        "typst",
+        "vue"
       },
       auto_install = true,
       highlight = {

@@ -18,3 +18,13 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.cmd("set filetype=c")
   end,
 })
+
+vim.filetype.add({
+  pattern = {
+    ["Makefile"] = "make",
+    ["makefile"] = "make",
+  },
+  extension = {
+    make = "make",
+  },
+})

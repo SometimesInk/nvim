@@ -4,16 +4,20 @@ return {
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local lspconfig = require("lspconfig")
+    local util = require("lspconfig.util")
 
     -- Function to attach key mappings for LSP actions
     local on_attach = function(client, bufnr)
       local bufopts = { noremap = true, silent = true, buffer = bufnr }
+      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+      vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
+      vim.keymap.set('n', '<space>p', vim.diagnostic.goto_prev, bufopts)
+      vim.keymap.set('n', '<space>r', vim.diagnostic.goto_next, bufopts)
       -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-      -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
       -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
       -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
       -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-      -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
       -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
     end
 
@@ -46,8 +50,35 @@ return {
     })
 
     lspconfig.bashls.setup({
+      cmd = { "bash-language-server", "start" },
+      filetype = { "sh", "zsh", "make" },
       on_attach = on_attach,
       capabilities = capabilities,
+    })
+
+    lspconfig.ast_grep.setup({
+      cmd = { "ast-grep", "lsp" },
+      filetypes = { -- https://ast-grep.github.io/reference/languages.html
+        "c",
+        "cpp",
+        "rust",
+        "go",
+        "java",
+        "python",
+        "javascript",
+        "typescript",
+        "html",
+        "css",
+        "kotlin",
+        "dart",
+        "lua",
+      },
+      root_dir = util.root_pattern("sgconfig.yaml", "sgconfig.yml"),
+    })
+
+    lspconfig.csharp_ls.setup({
+      cmd = { "csharp_ls" },
+      filetypes = { "cs" }
     })
   end,
 }
