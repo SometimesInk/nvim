@@ -9,20 +9,21 @@ return {
     -- Function to attach key mappings for LSP actions
     local on_attach = function(client, bufnr)
       local bufopts = { noremap = true, silent = true, buffer = bufnr }
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-      vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
-      vim.keymap.set('n', '<space>p', vim.diagnostic.goto_prev, bufopts)
-      vim.keymap.set('n', '<space>r', vim.diagnostic.goto_next, bufopts)
-      -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-      -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+      vim.keymap.set("n", "F", vim.diagnostic.open_float, bufopts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+      vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, bufopts)
+      vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, bufopts)
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+      -- vim.keymap.set("n", "gra", vim.lsp.buf.code_action, bufopts)
       -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-      -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-      -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+      -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+      -- vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
     end
 
     -- Setup LSP servers
     lspconfig.lua_ls.setup({
+      on_attach = on_attach,
       capabilities = capabilities,
       Lua = {
         runtime = {
@@ -50,13 +51,15 @@ return {
     })
 
     lspconfig.bashls.setup({
-      cmd = { "bash-language-server", "start" },
-      filetype = { "sh", "zsh", "make" },
       on_attach = on_attach,
       capabilities = capabilities,
+      cmd = { "bash-language-server", "start" },
+      filetype = { "sh", "zsh", "make" },
     })
 
     lspconfig.ast_grep.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
       cmd = { "ast-grep", "lsp" },
       filetypes = { -- https://ast-grep.github.io/reference/languages.html
         "c",
@@ -77,8 +80,10 @@ return {
     })
 
     lspconfig.csharp_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
       cmd = { "csharp_ls" },
-      filetypes = { "cs" }
+      filetypes = { "cs" },
     })
   end,
 }

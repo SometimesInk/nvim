@@ -21,16 +21,17 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         -- Scroll through selections
-        ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item()),
-        ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item()),
+        ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item()),
+        ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item()),
 
         -- Scroll through docs
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
 
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-Tab>"] = cmp.mapping.complete(),
+        -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       -- Sources for completion
       sources = cmp.config.sources({

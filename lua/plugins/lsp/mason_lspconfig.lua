@@ -7,7 +7,7 @@ return {
       "clangd",
       "bashls",
       "ast_grep",
-      "csharp_ls"
+      "csharp_ls",
     },
   },
 }

@@ -1,17 +1,25 @@
 return {
   "lervag/vimtex",
-  enabled = false,
-  lazy = false, -- lazy-loading will disable inverse search
-  init = function()
-    -- VimTeX configuration goes here, e.g.
+  enabled = true,
+  lazy = false, -- must be false for inverse search to work
+  config = function()
+    -- Vimtex settings
+    vim.g.vimtex_compiler_method = "latexmk"
+    vim.g_vimtex_compiler_latexmk = {
+      continuous = 1,
+    }
     vim.g.vimtex_view_method = "zathura"
+    vim.g.vimtex_quickfix_mode = 0
+    vim.g.vimtex_quickfix_method = "latexlog"
+    vim.g.vimtex_indent_enabled = 1
+    vim.g.vimtex_mappings_disable = { ["n"] = { "K" } }
+
+
+    -- Key mappings
     vim.api.nvim_set_keymap("n", "<leader>cB", ":VimtexView<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<leader>cb", ":VimtexCompile<CR>", { noremap = true, silent = true })
   end,
-  config = function()
-    vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
-    vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
-  end,
+
   keys = {
     { "<localLeader>l", "", desc = "+vimtex", ft = "tex" },
   },

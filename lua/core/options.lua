@@ -7,6 +7,8 @@ vim.opt.wrap = true
 
 vim.opt.termguicolors = true
 
+vim.api.nvim_set_option("clipboard", "unnamedplus")
+
 -- Tab equals 2 spaces
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
